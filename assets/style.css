@@ -1,0 +1,6 @@
+.rangeselector {
+    display: none !important;
+}
+.js-plotly-plot .plotly .main-svg {
+    overflow:visible;
+}
