@@ -26,8 +26,10 @@ def time_filter(df, day, month, year):
     '''
     Selects single day of data from gantt-ready dataframe
     '''
-    return df[
+    filtered = df[
         (df['Start'].dt.month == month) &
         (df['Start'].dt.day == day) &
         (df['Start'].dt.year == year)
     ]
+    filtered.reset_index(drop=True, inplace=True)
+    return filtered
