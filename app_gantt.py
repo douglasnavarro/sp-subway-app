@@ -14,10 +14,10 @@ app = dash.Dash(__name__)
 server = app.server
 
 '''
-    The layout of the app is a big title,
-    an input component for the line
-    an input component for the date
-    and of course a chart
+The layout of the app is a big title,
+an input component for the line
+an input component for the date
+and of course a chart
 '''
 app.layout = html.Div(className="container", children=[
         html.H3(className="center-align", children='Veja o histórico do transporte sobre trilhos de SP'),
@@ -54,9 +54,9 @@ app.layout = html.Div(className="container", children=[
 ])
 
 '''
-    The app needs to be able to
-    update the chart using the
-    variables input by the user
+The app needs to be able to
+update the chart using the
+variables input by the user
 '''
 @app.callback(
     dash.dependencies.Output('gantt-plot', 'figure'),
@@ -69,10 +69,14 @@ def update_gantt(date, value):
     filtered_df = gantt_filter(line_filtered)
     filtered_df = time_filter(filtered_df, converted_date.day,converted_date.month,converted_date.year)
     filtered_df.reset_index(drop=True, inplace=True)
+    if filtered_df.empty:
+        title = 'Não há dados para a data e linha selecionadas.'
+    else:
+        title = 'Operação da linha {} na data {}'.format(value.capitalize(), converted_date.strftime('%d/%m/%Y'))
     fig = ff.create_gantt(
         filtered_df,
         group_tasks=True,
-        title='Operação da linha {} na data {}'.format(value.capitalize(), converted_date.strftime('%d/%m/%Y')),
+        title=title,
         bar_width=0.3,
         showgrid_x=True,
         showgrid_y=False
