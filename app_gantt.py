@@ -20,7 +20,7 @@ def header():
             html.Div(className="nav-wrapper", children=[
                 html.A(style={"margin-left":"1%"}, href="#", className="brand-logo", children="De olho no Metrô"),
                 html.Ul(className="right hide-on-med-and-down", children=[
-                    html.Li(children=html.A(href="", children="Relatório dia")),
+                    html.Li(className="active", children=html.A(href="", children="Relatório dia")),
                     html.Li(children=html.A(href="", children="Relatório mês")),
                     html.Li(children=html.A(href="", children="Sobre")),
                     html.Li(children=html.A(className="waves-effect waves-light btn", href="", children="Baixar os dados")),
@@ -60,64 +60,10 @@ def day_report():
         ])
     ])
 
-
-
 app.layout = html.Main(children=[
     header(),
     day_report(),
 ])
-
-# app.layout = html.Div(
-#     [
-#         html.Nav(className="grey darken-3", children=[
-#             html.Div(className="nav-wrapper", children=[
-#                 html.A(style={"margin-left":"1%"}, href="#", className="brand-logo", children="De olho no Metrô"),
-#                 html.Ul(className="right hide-on-med-and-down", children=[
-#                     html.Li(children=html.A(href="", children="Sobre")),
-#                     html.Li(children=html.A(className="waves-effect waves-light btn", href="", children="Baixar os dados")),
-#                 ])
-#             ])
-#         ]),
-#         html.Ul(id="slide-out", className="sidenav", children=[
-#             html.Li(html.A(href="#!", children="Link")),
-#         ]),
-#     ]
-# )
-
-
-# app.layout = html.Div(className="three columns", children=[
-#         html.H3(className="center-align", children='Veja o histórico do transporte sobre trilhos de SP'),
-#         html.Div([
-#             html.H5(children='Linha'),
-#             dcc.Dropdown(
-#                 id='lines-dropdown',
-#                 options=[{'label': i.capitalize(), 'value': i} for i in df.Line.unique()],
-#                 value='azul'
-#             ),
-#             html.H5(children='Dia'),
-#             dcc.DatePickerSingle(
-#                 id='date-picker-single',
-#                 min_date_allowed=df['Time'].min(),
-#                 max_date_allowed=df['Time'].max(),
-#                 initial_visible_month=df['Time'].max(),
-#                 date=datetime(2018,7,25),
-#                 display_format='DD/MM/YYYY'
-#             )
-#         ]),
-#         html.Div(
-#             id='chart',
-#             className='center-align',
-#             children=[
-#                 dcc.Graph(
-#                     id='gantt-plot',
-#                     config={
-#                         'displayModeBar': False,
-#                         'showAxisDragHandles':False,
-#                         'autosizable':True
-#                     }
-#                 )
-#         ])
-# ])
 
 '''
 The app needs to be able to
