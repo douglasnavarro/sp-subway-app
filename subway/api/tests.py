@@ -19,7 +19,7 @@ class BaseViewTest(APITestCase):
     def setUp(self):
         for reading in test_data:
             self.create_reading(**reading)
-    
+
 class GetAllReadingsTest(BaseViewTest):
 
     def test_get_all_readings(self):
@@ -68,5 +68,14 @@ class PostReadingsTest(BaseViewTest):
         response = self.client.post('/api/', payload, format='json')
 
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+
+        self.client.logout()
+    
+    def test_post_empty_fields(self):
+        self.client.login(username='test_user', password='test_user123')
+        payload = {'timestamp':'2018-09-25T13:00', 'line':'amarela', 'status':''}
+        response = self.client.post('/api/', payload, format='json')
+
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
         self.client.logout()
